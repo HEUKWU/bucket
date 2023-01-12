@@ -77,13 +77,19 @@ function cancel_done(num) {
 }
 
 function bucket_delete(num) {
-    $.ajax({
-        type: "POST",
-        url: "/bucket/delete",
-        data: {num_give:num},
-        success: function (response) {
-            alert(response["msg"])
-            window.location.reload();
-        }
-    });
+    var res;
+    abf = confirm("삭제하시겠습니까?");
+    if (abf == true) {
+        $.ajax({
+            type: "POST",
+            url: "/bucket/delete",
+            data: {num_give: num},
+            success: function (response) {
+                alert(response["msg"])
+                window.location.reload();
+            }
+        });
+    } else {
+        return;
+    }
 }
