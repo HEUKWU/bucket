@@ -20,11 +20,20 @@ def bucket_post():
     bucket_list = list(db.bucket.find({}, {'_id: False'}))
     count = len(bucket_list) + 1
 
-    doc = {
-        'num': count,
-        'bucket': bucket_receive,
-        'done': 0
-    }
+    if (db.bucket.find_one({'num': count}) is not None):
+        count = count + 1
+        doc = {
+            'num': count,
+            'bucket': bucket_receive,
+            'done': 0
+        }
+
+    else:
+        doc = {
+            'num': count,
+            'bucket': bucket_receive,
+            'done': 0
+        }
 
     db.bucket.insert_one(doc)
 
@@ -41,6 +50,12 @@ def bucket_cancel():
     num_receive = request.form['num_give']
     user = db.bucket.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
     return jsonify({'msg': '취소 완료!'})
+
+@app.route("/bucket/delete", methods=["POST"])
+def bucket_delete():
+    num_receive = request.form['num_give']
+    user = db.bucket.delete_one({'num': int(num_receive)})
+    return jsonify({'msg': '삭제 완료!'})
 
 @app.route("/bucket", methods=["GET"])
 def bucket_get():

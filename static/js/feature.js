@@ -18,12 +18,14 @@ function show_bucket(){
                     temp_html = `<li>
                                             <h2>✅ ${bucket}</h2>
                                             <button onclick="done_bucket(${num})" type="button" class="btn btn-outline-primary">완료!</button>
+                                            <button id="delete" onclick="bucket_delete(${num})" type="button" class="btn btn-outline-danger">삭제</button>
                                         </li>`
                     $('#done').append(temp_html);
                 } else {
                     temp_html = `<li>
                                             <h2 class="done">✅ ${bucket}</h2>
                                             <button type="button" id="cancel" onclick="cancel_done(${num})" class="btn btn-light">취소</button>
+                                            <button id="delete" onclick="bucket_delete(${num})" type="button" class="btn btn-outline-danger">삭제</button>
                                             </li>
                                         `
                     $('#bucket-list').append(temp_html);
@@ -71,6 +73,24 @@ function cancel_done(num) {
         $.ajax({
             type: "POST",
             url: "/bucket/cancel",
+            data: {num_give: num},
+            success: function (response) {
+                alert(response["msg"])
+                window.location.reload();
+            }
+        });
+    } else {
+        return;
+    }
+}
+
+function bucket_delete(num) {
+    var res;
+    abf = confirm("삭제하시겠습니까?");
+    if (abf == true) {
+        $.ajax({
+            type: "POST",
+            url: "/bucket/delete",
             data: {num_give: num},
             success: function (response) {
                 alert(response["msg"])
