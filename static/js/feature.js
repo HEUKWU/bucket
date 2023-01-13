@@ -21,7 +21,7 @@ function show_bucket(){
                                             <button id="delete" onclick="bucket_delete(${num})" type="button" class="btn btn-outline-danger">삭제</button>
 
                                         </li>`
-                    $('#bucket-list').append(temp_html);
+                    $('#done').append(temp_html);
                 } else {
                     temp_html = `<li>
                                             <h2 class="done">✅ ${bucket}</h2>
@@ -29,7 +29,7 @@ function show_bucket(){
                                             <button id="delete" onclick="bucket_delete(${num})" type="button" class="btn btn-outline-danger">삭제</button>
                                             </li>
                                         `
-                    $('#done').append(temp_html);
+                    $('#bucket-list').append(temp_html);
                 }
 
             }
