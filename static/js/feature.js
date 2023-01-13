@@ -65,24 +65,12 @@ function done_bucket(num){
 }
 
 function cancel_done(num) {
-    $.ajax({
-        type: "POST",
-        url: "/bucket/cancel",
-        data: {num_give:num},
-        success: function (response) {
-            alert(response["msg"])
-            window.location.reload();
-        }
-    });
-}
-
-function bucket_delete(num) {
     var res;
-    abf = confirm("삭제하시겠습니까?");
+    abf = confirm("취소하시겠습니까?");
     if (abf == true) {
         $.ajax({
             type: "POST",
-            url: "/bucket/delete",
+            url: "/bucket/cancel",
             data: {num_give: num},
             success: function (response) {
                 alert(response["msg"])

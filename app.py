@@ -42,12 +42,6 @@ def bucket_cancel():
     user = db.bucket.update_one({'num': int(num_receive)}, {'$set': {'done': 0}})
     return jsonify({'msg': '취소 완료!'})
 
-@app.route("/bucket/delete", methods=["POST"])
-def bucket_delete():
-    num_receive = request.form['num_give']
-    user = db.bucket.delete_one({'num': int(num_receive)})
-    return jsonify({'msg': '삭제 완료!'})
-
 @app.route("/bucket", methods=["GET"])
 def bucket_get():
     buckets_list = list(db.bucket.find({}, {'_id': False}))
