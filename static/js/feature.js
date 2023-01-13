@@ -21,14 +21,17 @@ function show_bucket(){
                                             <button id="delete" onclick="bucket_delete(${num})" type="button" class="btn btn-outline-danger">삭제</button>
 
                                         </li>`
+                    $('#bucket-list').append(temp_html);
                 } else {
                     temp_html = `<li>
                                             <h2 class="done">✅ ${bucket}</h2>
                                             <button type="button" id="cancel" onclick="cancel_done(${num})" class="btn btn-light">취소</button>
                                             <button id="delete" onclick="bucket_delete(${num})" type="button" class="btn btn-outline-danger">삭제</button>
-                                        </li>`
+                                            </li>
+                                        `
+                    $('#done').append(temp_html);
                 }
-                $('#bucket-list').append(temp_html);
+
             }
         }
     });
